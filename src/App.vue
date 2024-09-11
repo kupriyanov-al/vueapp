@@ -20,7 +20,7 @@
       </div>
     </div>
     <!-- Карточка для заполнения -->
-    <app-note v-for="(note, index) in notes" :key="index" :head="note.head" :desc="note.desc"></app-note>
+    <app-note v-for="note in notes" :key="note.id" :head="note.head" :desc="note.desc" :id="note.id" :is-open="note.isOpen"></app-note>
 
   </div>
 
@@ -37,28 +37,32 @@ export default {
  
   data() {
     return {
-      
+      openRate: 0,
       newNote: {
-
+        id: 0,
         head: '',
-        desc: ''
+        desc: '',
+        isOpen: false
       },
       
       notes: [{
-
+        id: 1,
         head: "Заголовок1",
-        desc: "Описание1"
+        desc: "Описание1",
+        isOpen: false
       },
       {
-
+        id: 2,
         head: "Заголовок2",
-        desc: "Описание3"
+        desc: "Описание3",
+        isOpen: false
       }
       ]
     }
   },
   methods: {
     newAddNote() {
+      this.newNote.id=this.notes.length+1
       this.notes.push(Object.assign({}, this.newNote))
       this.newNote.desc = ''
       this.newNote.head = ''
